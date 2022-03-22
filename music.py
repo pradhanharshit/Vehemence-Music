@@ -7,6 +7,11 @@ import mediapipe as mp
 from keras.models import load_model 
 import webbrowser
 
+import pywhatkit
+
+
+
+
 model  = load_model("model.h5")
 label = np.load("labels.npy")
 
@@ -81,7 +86,7 @@ class EmotionProcessor:
 lang = st.text_input("Language")
 singer = st.text_input("singer")
 
-if lang and singer and st.session_state["run"] !="false":
+if lang and singer and st.session_state["run"] != "false":
     webrtc_streamer(key="key", desired_playing_state=True,
                     video_processor_factory=EmotionProcessor)
 
@@ -92,7 +97,9 @@ if btn:
         st.warning("Please let me Capture your Emotion first")
         st.session_state["run"] = "true"
     else:
-        webbrowser.open(f"https://music.youtube.com/search?q={lang}+{emotion}+songs")
+        #command=input("enter song: ")
+        pywhatkit.playonyt(f"{singer}+{lang}+{emotion}+songs")
+        #webbrowser.open(f"https://music.youtube.com/search?q={lang}+{emotion}+songs")
         np.save("emotion.npy", np.array([""]))
         st.session_state["run"]="false"
 
