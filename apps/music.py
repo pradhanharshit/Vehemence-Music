@@ -20,18 +20,18 @@ hands = mp.solutions.hands
 holis = holistic.Holistic()
 drawing = mp.solutions.drawing_utils
 
-if "run" not in st.session_state:
-    st.session_state["run"] = "true"
+# if "run" not in st.session_state:
+#     st.session_state["run"] = "true"
 
-try: 
-    emotion= np.load("emotion.npy")[0]
-except:
-    emotion=""
+# try: 
+#     emotion= np.load("emotion.npy")[0]
+# except:
+#     emotion=""
 
-if not(emotion):
-    st.session_state["run"] = "true"
-else:
-    st.session_state["run"] = "false"
+# if not(emotion):
+#     st.session_state["run"] = "true"
+# else:
+#     st.session_state["run"] = "false"
 
 
 class EmotionProcessor:
@@ -83,25 +83,43 @@ class EmotionProcessor:
 
 ##########################################
 
-lang = st.text_input("Language")
-singer = st.text_input("singer")
+def main():
+################
+    if "run" not in st.session_state:
+        st.session_state["run"] = "true"
 
-if lang and singer and st.session_state["run"] != "false":
-    webrtc_streamer(key="key", desired_playing_state=True,
-                    video_processor_factory=EmotionProcessor)
+    try: 
+        emotion= np.load("emotion.npy")[0]
+    except:
+        emotion=""
 
-btn = st.button("Recommend me songs")
-
-if btn:
     if not(emotion):
-        st.warning("Please let me Capture your Emotion first")
         st.session_state["run"] = "true"
     else:
-        #command=input("enter song: ")
-        pywhatkit.playonyt(f"{singer}+{lang}+{emotion}+songs")
-        #webbrowser.open(f"https://music.youtube.com/search?q={lang}+{emotion}+songs")
-        np.save("emotion.npy", np.array([""]))
-        st.session_state["run"]="false"
+        st.session_state["run"] = "false"
+#################
+
+    lang = st.text_input("Language")
+    singer = st.text_input("singer")
+
+    if lang or singer and st.session_state["run"] != "false":
+        webrtc_streamer(key="key", desired_playing_state=True,
+                        video_processor_factory=EmotionProcessor)
+
+    btn = st.button("Recommend me songs")
+
+    if btn:
+        if not(emotion):
+            st.warning("Please let me Capture your Emotion first")
+            st.session_state["run"] = "true"
+        else:
+            #command=input("enter song: ")
+            pywhatkit.playonyt(f"{singer}+{lang}+{emotion}+songs")
+            #webbrowser.open(f"https://music.youtube.com/search?q={lang}+{emotion}+songs")
+            np.save("emotion.npy", np.array([""]))
+            st.session_state["run"]="false"
 
 
+if __name__ == main:
+    main()
 

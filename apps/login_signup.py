@@ -1,6 +1,12 @@
 import streamlit as st
 import pandas as pd
 
+################################
+
+
+
+
+##################################
 
 # Security
 #passlib,hashlib,bcrypt,scrypt
@@ -14,7 +20,7 @@ def check_hashes(password,hashed_text):
 	return False
 # DB Management
 import sqlite3 
-conn = sqlite3.connect('vehemence-data.db')
+conn = sqlite3.connect('vehemence-data.db',check_same_thread=False)
 c = conn.cursor()
 # DB  Functions
 def create_usertable():
@@ -64,9 +70,15 @@ def main():
 
 				st.success("Logged In as {}".format(username))
 				
-				# task = st.selectbox("Task",["Add Post","Analytics","Profiles"])
-				# if task == "Add Post":
-				# 	st.subheader("Add Your Post")
+				task = st.selectbox("Task",["Play songs"])
+				if task == "Play songs":
+				 	#st.subheader("Detecting Emotion")
+					#import streamlit as st
+					from multiapp import MultiApp
+					from . import music
+					app = MultiApp()
+					app.add_app("Music", music.main)
+					app.run()
 
 				# elif task == "Analytics":
 				# 	st.subheader("Analytics")
