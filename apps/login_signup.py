@@ -39,9 +39,9 @@ def view_all_users():
 
 
 def main():
-	"""Simple Login App"""
+	"""Vehemence Music App"""
 
-	st.title("Simple Login App")
+	st.title("Vehemence Music App")
 
 	menu = ["Home","Login","SignUp"]
 	choice = st.sidebar.selectbox("Menu",menu)
@@ -63,18 +63,18 @@ def main():
 			if result:
 
 				st.success("Logged In as {}".format(username))
+				
+				# task = st.selectbox("Task",["Add Post","Analytics","Profiles"])
+				# if task == "Add Post":
+				# 	st.subheader("Add Your Post")
 
-				task = st.selectbox("Task",["Add Post","Analytics","Profiles"])
-				if task == "Add Post":
-					st.subheader("Add Your Post")
-
-				elif task == "Analytics":
-					st.subheader("Analytics")
-				elif task == "Profiles":
-					st.subheader("User Profiles")
-					user_result = view_all_users()
-					clean_db = pd.DataFrame(user_result,columns=["Username","Password"])
-					st.dataframe(clean_db)
+				# elif task == "Analytics":
+				# 	st.subheader("Analytics")
+				# elif task == "Profiles":
+				# 	st.subheader("User Profiles")
+				# 	user_result = view_all_users()
+				# 	clean_db = pd.DataFrame(user_result,columns=["Username","Password"])
+				# 	st.dataframe(clean_db)
 			else:
 				st.warning("Incorrect Username/Password")
 
