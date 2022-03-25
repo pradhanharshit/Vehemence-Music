@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 
 ################################
-
+from . import emma
 
 
 
@@ -70,14 +70,16 @@ def main():
 
 				st.success("Logged In as {}".format(username))
 				
-				task = st.selectbox("Task",["Play songs"])
+				#task = st.selectbox("Task",["Play songs"])
+				task = "Play songs"
 				if task == "Play songs":
 				 	#st.subheader("Detecting Emotion")
 					#import streamlit as st
 					from multiapp import MultiApp
 					from . import music
 					app = MultiApp()
-					app.add_app("Music", music.main)
+					app.add_app("Emotion-Based", music.main)
+					app.add_app("Voice-Based", emma.assistant)
 					app.run()
 
 				# elif task == "Analytics":

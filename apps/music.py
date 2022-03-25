@@ -82,9 +82,7 @@ class EmotionProcessor:
         return av.VideoFrame.from_ndarray(frm, format="bgr24")
 
 ##########################################
-
-def main():
-################
+def help():
     if "run" not in st.session_state:
         st.session_state["run"] = "true"
 
@@ -97,6 +95,9 @@ def main():
         st.session_state["run"] = "true"
     else:
         st.session_state["run"] = "false"
+def main():
+################
+    help()
 #################
 
     lang = st.text_input("Language")
@@ -114,10 +115,12 @@ def main():
             st.session_state["run"] = "true"
         else:
             #command=input("enter song: ")
+            st.session_state["run"]="false"
             pywhatkit.playonyt(f"{singer}+{lang}+{emotion}+songs")
+            
             #webbrowser.open(f"https://music.youtube.com/search?q={lang}+{emotion}+songs")
             np.save("emotion.npy", np.array([""]))
-            st.session_state["run"]="false"
+            
 
 
 if __name__ == main:
