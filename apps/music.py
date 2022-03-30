@@ -20,18 +20,18 @@ hands = mp.solutions.hands
 holis = holistic.Holistic()
 drawing = mp.solutions.drawing_utils
 
-# if "run" not in st.session_state:
-#     st.session_state["run"] = "true"
+if "run" not in st.session_state:
+    st.session_state["run"] = "true"
 
-# try: 
-#     emotion= np.load("emotion.npy")[0]
-# except:
-#     emotion=""
+try: 
+    emotion= np.load("emotion.npy")[0]
+except:
+    emotion=""
 
-# if not(emotion):
-#     st.session_state["run"] = "true"
-# else:
-#     st.session_state["run"] = "false"
+if not(emotion):
+    st.session_state["run"] = "true"
+else:
+    st.session_state["run"] = "false"
 
 
 class EmotionProcessor:
@@ -119,6 +119,7 @@ def main():
             pywhatkit.playonyt(f"{singer}+{lang}+{emotion}+songs")
             
             #webbrowser.open(f"https://music.youtube.com/search?q={lang}+{emotion}+songs")
+            st.session_state["run"]="false"
             np.save("emotion.npy", np.array([""]))
             
 
