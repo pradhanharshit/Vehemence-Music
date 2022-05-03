@@ -34,3 +34,8 @@ def login_user(username,password):
 	c.execute('SELECT * FROM userstable WHERE username =? AND password = ?',(username,password))
 	data = c.fetchall()
 	return data
+
+def view_all_users():
+	c.execute('SELECT * FROM userstable')
+	data = c.fetchall()
+	return data
