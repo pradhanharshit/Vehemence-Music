@@ -39,3 +39,11 @@ def view_all_users():
 	c.execute('SELECT * FROM userstable')
 	data = c.fetchall()
 	return data
+
+def main():
+	"""Vehemence Music App"""
+
+	st.title("Vehemence Music App")
+
+	menu = ["Home","Login","SignUp"]
+	choice = st.sidebar.selectbox("Menu",menu)
