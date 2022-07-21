@@ -60,4 +60,3 @@ def main():
 			# if password == '12345':
 			create_usertable()
 			hashed_pswd = make_hashes(password)
-nfvfvfh
